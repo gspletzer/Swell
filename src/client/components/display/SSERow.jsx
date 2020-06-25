@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactJson from 'react-json-view';
+import React, { Component } from "react";
+import ReactJson from "react-json-view";
 
 class SSERow extends Component {
   constructor(props) {
@@ -9,28 +9,31 @@ class SSERow extends Component {
   }
 
   handleClick(e) {
-    let expandable = e.target.closest('.response_sse').getElementsByClassName('data-inner').item(0);
+    let expandable = e.target
+      .closest(".response_sse")
+      .getElementsByClassName("data-inner")
+      .item(0);
     let expandBtn = e.target;
-    expandBtn.classList.toggle('expand-active')
-    expandable.classList.toggle('expanded');
+    expandBtn.classList.toggle("expand-active");
+    expandable.classList.toggle("expanded");
   }
   render() {
     let contentBody;
     try {
       let json = JSON.parse(this.props.content.data);
-      contentBody = <ReactJson src={json} name={false} displayDataTypes={false} />
+      contentBody = (
+        <ReactJson src={json} name={false} displayDataTypes={false} />
+      );
       // To Do Add pretty print
     } catch (err) {
       contentBody = this.props.content.data;
     }
 
     return (
-      <div className={'response_sse'}>
-        <div className={'grid-4'}>
+      <div className={"response_sse"}>
+        <div className={"grid-4"}>
           <div>
-            <span className="tertiary-title">
-              ID {this.props.content.id}
-            </span>
+            <span className="tertiary-title">ID {this.props.content.id}</span>
           </div>
 
           <div>
@@ -46,15 +49,16 @@ class SSERow extends Component {
           </div>
 
           <div>
-            <span className={'tertiary-title expand-btn'} onClick={(e) => this.handleClick(e)} ></span>
+            <span
+              className={"tertiary-title expand-btn"}
+              onClick={(e) => this.handleClick(e)}
+            ></span>
           </div>
         </div>
 
-        <div className={'title-row data-inner'}>
+        <div className={"title-row data-inner"}>
           <div>
-            <span className={'tertiary-title'}>
-              Data {contentBody}
-            </span>
+            <span className={"tertiary-title"}>Data {contentBody}</span>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-const classNames = require('classnames');
+const classNames = require("classnames");
 
 class ProtocolSelect extends Component {
   constructor(props) {
@@ -12,22 +12,27 @@ class ProtocolSelect extends Component {
     const HTTPSStyleClasses = classNames({
       composer_protocol_button: true,
       http: true,
-      'composer_protocol_button-selected_http': (this.props.currentProtocol === '' || /https?:\/\//.test(this.props.currentProtocol)) && !this.props.graphQL && !this.props.gRPC,
+      "composer_protocol_button-selected_http":
+        (this.props.currentProtocol === "" ||
+          /https?:\/\//.test(this.props.currentProtocol)) &&
+        !this.props.graphQL &&
+        !this.props.gRPC,
     });
     const WSStyleClasses = classNames({
       composer_protocol_button: true,
       ws: true,
-      'composer_protocol_button-selected_ws': /wss?:\/\//.test(this.props.currentProtocol) && !this.props.graphQL,
+      "composer_protocol_button-selected_ws":
+        /wss?:\/\//.test(this.props.currentProtocol) && !this.props.graphQL,
     });
     const GQLStyleClasses = classNames({
       composer_protocol_button: true,
       gql: true,
-      'composer_protocol_button-selected_gql': this.props.graphQL,
+      "composer_protocol_button-selected_gql": this.props.graphQL,
     });
     const GRPCStyleClasses = classNames({
       composer_protocol_button: true,
       grpc: true,
-      'composer_protocol_button-selected_grpc': this.props.gRPC,
+      "composer_protocol_button-selected_grpc": this.props.gRPC,
     });
 
     return (
@@ -37,7 +42,11 @@ class ProtocolSelect extends Component {
           role="button"
           tabIndex={0}
           className={HTTPSStyleClasses}
-          onMouseDown={() => this.props.onChangeHandler({ target: { value: 'http://' } }, 'protocol')
+          onMouseDown={() =>
+            this.props.onChangeHandler(
+              { target: { value: "http://" } },
+              "protocol"
+            )
           }
         >
           HTTP/S
@@ -47,7 +56,12 @@ class ProtocolSelect extends Component {
           role="button"
           tabIndex={0}
           className={WSStyleClasses}
-          onMouseDown={() => this.props.onChangeHandler({ target: { value: 'ws://' } }, 'protocol')}
+          onMouseDown={() =>
+            this.props.onChangeHandler(
+              { target: { value: "ws://" } },
+              "protocol"
+            )
+          }
         >
           WS
         </div>
@@ -56,7 +70,12 @@ class ProtocolSelect extends Component {
           role="button"
           tabIndex={0}
           className={GQLStyleClasses}
-          onMouseDown={() => this.props.onChangeHandler({ target: { value: '' } }, 'protocol', 'graphQLtrue')
+          onMouseDown={() =>
+            this.props.onChangeHandler(
+              { target: { value: "" } },
+              "protocol",
+              "graphQLtrue"
+            )
           }
         >
           GRAPHQL
@@ -66,7 +85,12 @@ class ProtocolSelect extends Component {
           role="button"
           tabIndex={0}
           className={GRPCStyleClasses}
-          onMouseDown={() => this.props.onChangeHandler({ target: { value: '' } }, 'protocol', false)
+          onMouseDown={() =>
+            this.props.onChangeHandler(
+              { target: { value: "" } },
+              "protocol",
+              false
+            )
           }
         >
           GRPC

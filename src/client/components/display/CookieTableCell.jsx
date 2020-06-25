@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
 
 class CookieTableCell extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   render() {
     return (
-      <div className='cookieTableCell'>
-        {this.props.detail.toString()}
-      </div>
-    )
+      <div className="cookieTableCell">{this.props.detail.toString()}</div>
+    );
   }
 }
 

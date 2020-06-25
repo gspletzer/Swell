@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class WWWField extends Component {
   constructor(props) {
@@ -8,13 +8,17 @@ class WWWField extends Component {
 
   render() {
     return (
-      <div style={{ display: 'flex' }} className='composer_header'>
+      <div style={{ display: "flex" }} className="composer_header">
         <input
           type="checkbox"
-          className='composer_header_checkbox'
+          className="composer_header_checkbox"
           checked={this.props.active}
           onChange={() => {
-            this.props.updateCallback(this.props.id, 'active', !this.props.active);
+            this.props.updateCallback(
+              this.props.id,
+              "active",
+              !this.props.active
+            );
           }}
         />
 
@@ -24,7 +28,7 @@ class WWWField extends Component {
           className="composer_header_input composer_header_input_first"
           value={this.props.Key}
           onChange={(e) => {
-            this.props.updateCallback(this.props.id, 'key', e.target.value);
+            this.props.updateCallback(this.props.id, "key", e.target.value);
           }}
         />
 
@@ -34,7 +38,7 @@ class WWWField extends Component {
           className="composer_header_input"
           value={this.props.value}
           onChange={(e) => {
-            this.props.updateCallback(this.props.id, 'value', e.target.value);
+            this.props.updateCallback(this.props.id, "value", e.target.value);
           }}
         />
       </div>

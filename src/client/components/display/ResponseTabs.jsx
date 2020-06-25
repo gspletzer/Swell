@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Tab from './Tab.jsx';
+import React, { Component } from "react";
+import Tab from "./Tab.jsx";
 
 class ResponseTabs extends Component {
   constructor(props) {
@@ -7,28 +7,39 @@ class ResponseTabs extends Component {
   }
 
   render() {
+    const events = "Response Events";
+    const cookies = "Response Cookies";
+    let headers = "Response Headers";
 
-    const events = 'Response Events';
-    const cookies = 'Response Cookies';
-    let headers = 'Response Headers';
-
-    if (this.props.content.gRPC === true ) {
-      headers = 'Response Metadata';
+    if (this.props.content.gRPC === true) {
+      headers = "Response Metadata";
     }
 
     return (
       <ul className="tab_list-response">
-        <Tab onTabSelected={this.props.handleTabSelect} tabName={events} key="events" openTab={this.props.openResponseTab}/>
-        <Tab onTabSelected={this.props.handleTabSelect} tabName={headers} key="headers" openTab={this.props.openResponseTab}/>
-        {
-          !this.props.content.gRPC &&
-          <Tab onTabSelected={this.props.handleTabSelect} tabName={cookies} key="cookies" openTab={this.props.openResponseTab}/>
-        }
-        </ul>
+        <Tab
+          onTabSelected={this.props.handleTabSelect}
+          tabName={events}
+          key="events"
+          openTab={this.props.openResponseTab}
+        />
+        <Tab
+          onTabSelected={this.props.handleTabSelect}
+          tabName={headers}
+          key="headers"
+          openTab={this.props.openResponseTab}
+        />
+        {!this.props.content.gRPC && (
+          <Tab
+            onTabSelected={this.props.handleTabSelect}
+            tabName={cookies}
+            key="cookies"
+            openTab={this.props.openResponseTab}
+          />
+        )}
+      </ul>
     );
   }
 }
 
 export default ResponseTabs;
-
-

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import WWWField from './WWWField.jsx';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import WWWField from "./WWWField.jsx";
 
 class WWWForm extends Component {
   constructor(props) {
@@ -9,72 +9,82 @@ class WWWForm extends Component {
     this.state = {
       wwwFields: [],
       fieldCount: 0,
-      rawString: '',
-    }
+      rawString: "",
+    };
     this.updateWwwField = this.updateWwwField.bind(this);
   }
 
   componentDidMount() {
     //"hi"="rocky"&"meow"="cats" in the body turns into 2 key/value pairs when switching to x-www
-    let matches = this.props.newRequestBody.bodyContent.match(/(([^(&|\n)]+=[^(&|\n)]+)&?)+/g);
+    let matches = this.props.newRequestBody.bodyContent.match(
+      /(([^(&|\n)]+=[^(&|\n)]+)&?)+/g
+    );
     if (matches) {
       this.props.setNewRequestBody({
         ...this.props.newRequestBody,
-        bodyContent: matches.join(''),
+        bodyContent: matches.join(""),
       });
     } else {
       this.props.setNewRequestBody({
         ...this.props.newRequestBody,
-        bodyContent: '',
+        bodyContent: "",
       });
-
     }
     this.addFieldIfNeeded();
   }
 
   componentDidUpdate() {
-    //create state from the incoming string, 
+    //create state from the incoming string,
     if (this.props.newRequestBody.bodyContent !== this.state.rawString) {
       //if there is only one k/v pair...
-      if (!this.props.newRequestBody.bodyContent.includes('&')) {
-        let key = this.props.newRequestBody.bodyContent.split('=')[0];
-        let value = this.props.newRequestBody.bodyContent.split('=')[1];
+      if (!this.props.newRequestBody.bodyContent.includes("&")) {
+        let key = this.props.newRequestBody.bodyContent.split("=")[0];
+        let value = this.props.newRequestBody.bodyContent.split("=")[1];
 
-        this.setState({
-          wwwFields: [{
-            id: Math.floor(Math.random() * 100000),
-            active: true,
-            key,
-            value,
-          }],
-          fieldCount: 1,
-          rawString: this.props.newRequestBody.bodyContent
-        }, () => {
-          this.addFieldIfNeeded();
-        })
+        this.setState(
+          {
+            wwwFields: [
+              {
+                id: Math.floor(Math.random() * 100000),
+                active: true,
+                key,
+                value,
+              },
+            ],
+            fieldCount: 1,
+            rawString: this.props.newRequestBody.bodyContent,
+          },
+          () => {
+            this.addFieldIfNeeded();
+          }
+        );
       }
       //more than one k/v pair
-      else if (this.props.newRequestBody.bodyContent.includes('&')) {
-        let fields = this.props.newRequestBody.bodyContent.split('&')
-          .map(field => {
-            let key = field.split('=')[0];
-            let value = field.split('=')[1];
+      else if (this.props.newRequestBody.bodyContent.includes("&")) {
+        let fields = this.props.newRequestBody.bodyContent
+          .split("&")
+          .map((field) => {
+            let key = field.split("=")[0];
+            let value = field.split("=")[1];
             return {
               id: Math.floor(Math.random() * 100000),
               active: true,
               key,
               value,
-            }
+            };
           })
-          .filter(field => field.key !== '' || field.value !== '');
+          .filter((field) => field.key !== "" || field.value !== "");
 
-        this.setState({
-          wwwFields: fields,
-          fieldCount: fields.length - 1,
-          rawString: this.props.newRequestBody.bodyContent
-        }, () => {
-          this.addFieldIfNeeded();
-        });
+        this.setState(
+          {
+            wwwFields: fields,
+            fieldCount: fields.length - 1,
+            rawString: this.props.newRequestBody.bodyContent,
+          },
+          () => {
+            this.addFieldIfNeeded();
+          }
+        );
       }
     }
   }
@@ -89,9 +99,9 @@ class WWWForm extends Component {
     });
 
     let bodyContent = wwwFieldsDeepCopy
-      .filter(wwwField => wwwField.active)
-      .map(wwwField => `${wwwField.key}=${wwwField.value}`)
-      .join('&');
+      .filter((wwwField) => wwwField.active)
+      .map((wwwField) => `${wwwField.key}=${wwwField.value}`)
+      .join("&");
 
     this.props.setNewRequestBody({
       ...this.props.newRequestBody,
@@ -101,13 +111,15 @@ class WWWForm extends Component {
 
   addFieldIfNeeded() {
     if (this.shouldAddField()) {
-      const wwwFieldsDeepCopy = JSON.parse(JSON.stringify(this.state.wwwFields));
+      const wwwFieldsDeepCopy = JSON.parse(
+        JSON.stringify(this.state.wwwFields)
+      );
 
       wwwFieldsDeepCopy.push({
         id: Math.floor(Math.random() * 100000),
         active: false,
-        key: '',
-        value: '',
+        key: "",
+        value: "",
       });
 
       this.setState({
@@ -121,22 +133,31 @@ class WWWForm extends Component {
       return true;
     }
 
-    return this.state.wwwFields
-      .map(wwwField => (wwwField.key === '' && wwwField.value === '' ? 1 : 0))
-      .reduce((acc, cur) => acc + cur) === 0;
+    return (
+      this.state.wwwFields
+        .map((wwwField) =>
+          wwwField.key === "" && wwwField.value === "" ? 1 : 0
+        )
+        .reduce((acc, cur) => acc + cur) === 0
+    );
   }
 
   render() {
     let wwwFieldsReactArr = this.state.wwwFields.map((wwwField, index) => {
       return (
-        <WWWField key={index} id={wwwField.id} active={wwwField.active} Key={wwwField.key} value={wwwField.value} updateCallback={this.updateWwwField} />
-      )
-    })
+        <WWWField
+          key={index}
+          id={wwwField.id}
+          active={wwwField.active}
+          Key={wwwField.key}
+          value={wwwField.value}
+          updateCallback={this.updateWwwField}
+        />
+      );
+    });
 
     return (
-      <div
-        className={'composer_headers_container-open'}
-      >
+      <div className={"composer_headers_container-open"}>
         {wwwFieldsReactArr}
       </div>
     );

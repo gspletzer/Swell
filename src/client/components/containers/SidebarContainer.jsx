@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import ComposerContainer from '../composer/ComposerContainer.jsx';
-import HistoryContainer from './HistoryContainer.jsx';
-import CollectionsContainer from './CollectionsContainer.jsx';
+import React, { Component } from "react";
+import ComposerContainer from "../composer/ComposerContainer.jsx";
+import HistoryContainer from "./HistoryContainer.jsx";
+import CollectionsContainer from "./CollectionsContainer.jsx";
 
 class SidebarContainer extends Component {
   constructor(props) {

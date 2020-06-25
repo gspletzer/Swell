@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReqResCtrl from '../../controllers/reqResController';
+import React, { Component } from "react";
+import ReqResCtrl from "../../controllers/reqResController";
 
 class OpenBtn extends Component {
   constructor(props) {

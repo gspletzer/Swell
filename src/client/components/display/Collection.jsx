@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
-import collectionsController from '../../controllers/collectionsController';
-import Trashcan from '../../../assets/img/Trashcan.png'
+import React, { Component } from "react";
+import collectionsController from "../../controllers/collectionsController";
+import Trashcan from "../../../assets/img/Trashcan.png";
 
 class Collection extends Component {
   constructor(props) {
     super(props);
     // this.state = {};
     this.deleteCollection = this.deleteCollection.bind(this);
-    this.addCollectionToReqResContainer = this.addCollectionToReqResContainer.bind(this);
+    this.addCollectionToReqResContainer = this.addCollectionToReqResContainer.bind(
+      this
+    );
   }
 
   addCollectionToReqResContainer() {
-    this.props.collectionToReqRes(this.props.content.reqResArray)
+    this.props.collectionToReqRes(this.props.content.reqResArray);
   }
 
   deleteCollection(e) {
@@ -21,22 +23,37 @@ class Collection extends Component {
 
   render() {
     return (
-      <div className={'collection-container'}>
-        <div className={'collection-text-container'} onClick={this.addCollectionToReqResContainer}>
-          <div className={'collection-name'}> {this.props.content.name}</div>
+      <div className={"collection-container"}>
+        <div
+          className={"collection-text-container"}
+          onClick={this.addCollectionToReqResContainer}
+        >
+          <div className={"collection-name"}> {this.props.content.name}</div>
         </div>
         <div className="collection-export-container">
-          <button onClick={() => collectionsController.exportCollection(this.props.content.id)}>Export</button>
+          <button
+            onClick={() =>
+              collectionsController.exportCollection(this.props.content.id)
+            }
+          >
+            Export
+          </button>
         </div>
-        <div className='collection-delete-container'>
-          <div className='collection-delete-fade'>
-          </div>
-          <div className={'collection-delete-button'} onClick={this.deleteCollection}>
-            <img className='collection-delete-image' src={Trashcan} id={this.props.content.id} ></img>
+        <div className="collection-delete-container">
+          <div className="collection-delete-fade"></div>
+          <div
+            className={"collection-delete-button"}
+            onClick={this.deleteCollection}
+          >
+            <img
+              className="collection-delete-image"
+              src={Trashcan}
+              id={this.props.content.id}
+            ></img>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

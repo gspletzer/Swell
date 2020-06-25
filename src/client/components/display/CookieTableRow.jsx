@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
-import CookieTableCell from './CookieTableCell.jsx'
-
+import React, { Component } from "react";
+import CookieTableCell from "./CookieTableCell.jsx";
 
 class CookieTableRow extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   render() {
     let tableCellArray = [];
     for (const key in this.props.cookie) {
-      tableCellArray.push(<CookieTableCell detail={this.props.cookie[key]} key={key}></CookieTableCell>)
+      tableCellArray.push(
+        <CookieTableCell
+          detail={this.props.cookie[key]}
+          key={key}
+        ></CookieTableCell>
+      );
     }
     if (!this.props.cookie.expirationDate) {
-      tableCellArray.push(<CookieTableCell detail={''} key='expirationDate'></CookieTableCell>)
+      tableCellArray.push(
+        <CookieTableCell detail={""} key="expirationDate"></CookieTableCell>
+      );
     }
-    return (
-      <div className='cookieTableRow grid-9'>
-        {tableCellArray}
-      </div>
-    )
+    return <div className="cookieTableRow grid-9">{tableCellArray}</div>;
   }
 }
 
