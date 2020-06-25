@@ -80,6 +80,9 @@ module.exports = {
     "react-hooks",
   ],
   rules: {
+    "spaced-comment": 0,
+    "prefer-destructuring": 0,
+    "prefer-const": 0,
     "arrow-body-style": 0,
     "react/jsx-filename-extension": 0,
     "comma-dangle": 0,
