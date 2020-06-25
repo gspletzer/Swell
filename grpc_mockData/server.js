@@ -41,7 +41,7 @@ function sayHello(ctx) {
 
   // an alias to ctx.response.res
   // This is set only in case of DUPLEX calls, to the the gRPC call reference itself
-  ctx.res = { message: "Hello " + ctx.req.name };
+  ctx.res = { message: `Hello ${ctx.req.name}` };
 
   // send response header metadata object directly as an argument and that is set and sent
   metadata.set("UNARY", "yes");
@@ -68,8 +68,8 @@ function sayHelloNested(ctx) {
   // console.log("firstPerson line 68 from server.js:", firstPerson)
   ctx.res = {
     serverMessage: [
-      { message: "Hello! " + firstPerson },
-      { message: "Hello! " + secondPerson },
+      { message: `Hello! ${firstPerson}` },
+      { message: `Hello! ${secondPerson}` },
     ],
   };
 
@@ -91,7 +91,7 @@ async function sayHellos(ctx) {
   // alias for ctx.request.req
   // In case of UNARY and RESPONSE_STREAM calls it is simply the gRPC call's request
 
-  let reqMessages = { message: "hello!!! " + ctx.req.name };
+  let reqMessages = { message: `Hello!!! ${ctx.req.name}` };
 
   dataStream.push(reqMessages);
   reqMessages = dataStream;
@@ -125,7 +125,7 @@ function sayHelloCs(ctx) {
       .map((message) => {
         counter++;
         // console.log('message content',message.name)
-        ctx.response.res = { message: "Client stream: " + message.name };
+        ctx.response.res = { message: `Client stream: ${message.name}` };
         messages.push(message.name);
         ctx.sendMetadata(metadata);
       })
@@ -134,7 +134,7 @@ function sayHelloCs(ctx) {
       .toCallback((err, result) => {
         if (err) return reject(err);
         // console.log(`done sayHelloClients counter ${counter}`)
-        ctx.response.res = { message: "SAYHELLOCs Client stream: " + messages };
+        ctx.response.res = { message: `SAYHELLO Client stream: ${messages}` };
         // console.log(ctx.response.res)
         resolve();
       });
@@ -153,7 +153,7 @@ function sayHelloBidi(ctx) {
   let counter = 0;
   ctx.req.on("data", (d) => {
     counter++;
-    ctx.res.write({ message: "bidi stream: " + d.name });
+    ctx.res.write({ message: `bidi stream: ${d.name}` });
   });
   metadata.set("bidiStream", "ohyes");
   ctx.sendMetadata(metadata);

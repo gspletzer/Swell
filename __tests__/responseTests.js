@@ -65,7 +65,7 @@ describe("ResponseContainer", () => {
 
 describe("ResponseTabs", () => {
   it("should render three tabs", () => {
-    const wrapper = shallow(<ResponseTabs content={"not grpc"} />);
+    const wrapper = shallow(<ResponseTabs content="not grpc" />);
     expect(wrapper.find("Tab")).toHaveLength(3);
   });
   it("grpc should render two tabs", () => {

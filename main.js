@@ -178,7 +178,8 @@ function createWindow() {
       pathname: "index.html",
       slashes: true,
     });
-  } else {
+  } 
+  else {
     indexPath = url.format({
       // if we are not in dev mode load production build file
       protocol: "file:",
@@ -212,11 +213,11 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
 
-    //tldr: Remove the BrowserWindow instance that we created earlier by setting its value to null when we exit Swell
+    // tldr: Remove the BrowserWindow instance that we created earlier by setting its value to null when we exit Swell
     mainWindow = null;
   });
 
-  //require menu file
+  // require menu file
   require("./menu/mainMenu");
 }
 
@@ -236,7 +237,7 @@ app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== "darwin") {
-    //darwin refers to macOS...
+    // darwin refers to macOS...
     app.quit(); // If User is on mac exit the program when all windows are closed
   }
 });
@@ -250,7 +251,7 @@ const sendStatusToWindow = (text) => {
 };
 
 ipcMain.on("check-for-update", () => {
-  //listens to ipcRenderer in UpdatePopUpContainer.jsx
+  // listens to ipcRenderer in UpdatePopUpContainer.jsx
   if (!dev) autoUpdater.checkForUpdates();
 });
 // autoUpdater.on('checking-for-update', () => {
@@ -313,7 +314,7 @@ ipcMain.on("export-collection", (event, args) => {
     // fileName is a string that contains the path and filename created in the save file dialog.
     fs.writeFile(resp.filePath, content, (err) => {
       if (err) {
-        console.log("An error ocurred creating the file " + err.message);
+        console.log(`An error ocurred creating the file + ${err.message}`);
       }
     });
   });
@@ -353,7 +354,7 @@ ipcMain.on("import-collection", (event, args) => {
 
     fs.readFile(filepath, "utf-8", (err, data) => {
       if (err) {
-        alert("An error ocurred reading the file :" + err.message);
+        alert(`An error ocurred reading the file : ${err.message}`);
         return;
       }
 
@@ -361,7 +362,8 @@ ipcMain.on("import-collection", (event, args) => {
       let parsed;
       try {
         parsed = JSON.parse(data);
-      } catch {
+      } 
+      catch {
         options.message = "Invalid File Structure";
         options.detail = "Please use a JSON object";
         dialog.showMessageBox(null, options);
@@ -407,7 +409,8 @@ ipcMain.on("http1-fetch-message", (event, arg) => {
           headers,
           body: { error: "This Is An SSE endpoint" },
         });
-      } else {
+      } 
+      else {
         headers[":status"] = response.status;
 
         const receivedCookie = headers["set-cookie"];

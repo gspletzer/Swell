@@ -25,7 +25,8 @@ function main() {
   // argv[0] and argv[1] will be node example.js
   if (process.argv.length >= 3) {
     user = process.argv[2];
-  } else {
+  } 
+  else {
     user = "world";
   }
 
@@ -47,7 +48,8 @@ function main() {
   const stream = client.sayHelloCs(meta, (err, response) => {
     if (err) {
       console.log(err);
-    } else {
+    } 
+    else {
       console.log(response);
     }
     client.close();

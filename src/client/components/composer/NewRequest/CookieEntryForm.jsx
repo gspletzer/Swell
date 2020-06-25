@@ -27,9 +27,10 @@ class CookieEntryForm extends Component {
     const cookiesDeepCopy = JSON.parse(
       JSON.stringify(this.props.newRequestCookies.cookiesArr)
     );
-    if (this.props.newRequestCookies.cookiesArr.length == 0) {
+    if (this.props.newRequestCookies.cookiesArr.length === 0) {
       this.addCookie([]);
-    } else if (
+    } 
+    else if (
       cookiesDeepCopy[cookiesDeepCopy.length - 1] &&
       cookiesDeepCopy[cookiesDeepCopy.length - 1].key !== ""
     ) {
@@ -58,7 +59,7 @@ class CookieEntryForm extends Component {
     );
 
     //find cookie to update
-    let indexToBeUpdated = undefined;
+    let indexToBeUpdated;
     for (let i = 0; i < cookiesDeepCopy.length; i++) {
       if (cookiesDeepCopy[i].id === id) {
         indexToBeUpdated = i;
@@ -85,7 +86,8 @@ class CookieEntryForm extends Component {
     //depending on if cookies is empty, update store, or first add a new cookie
     if (emptyCookiesCount === 0) {
       this.addCookie(cookiesDeepCopy);
-    } else {
+    } 
+    else {
       this.props.setNewRequestCookies({
         cookiesArr: cookiesDeepCopy,
         count: cookiesDeepCopy.length,

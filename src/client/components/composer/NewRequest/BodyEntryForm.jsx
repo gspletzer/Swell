@@ -50,7 +50,7 @@ class BodyEntryForm extends Component {
         return (
           <textarea
             value={this.props.newRequestBody.bodyContent}
-            className={"composer_textarea"}
+            className="composer_textarea"
             style={{ resize: "none" }}
             type="text"
             placeholder="Body"
@@ -95,7 +95,7 @@ class BodyEntryForm extends Component {
           <div className="composer_rawtype_textarea_container">
             <select
               style={rawTypeStyles}
-              className={"composer_rawtype_select"}
+              className="composer_rawtype_select"
               onChange={(e) =>
                 this.props.setNewRequestBody({
                   ...this.props.newRequestBody,

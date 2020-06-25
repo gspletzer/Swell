@@ -17,7 +17,7 @@ class FieldEntryForm extends Component {
         let url = value;
         this.props.setNewRequestFields({
           ...this.props.newRequestFields,
-          url: url,
+          url,
         });
         break;
       }
@@ -42,7 +42,8 @@ class FieldEntryForm extends Component {
 }`,
           });
           break;
-        } else if (value === "http://") {
+        } 
+        else if (value === "http://") {
           //if http/s
           this.props.setNewRequestFields({
             ...this.props.newRequestFields,
@@ -60,7 +61,8 @@ class FieldEntryForm extends Component {
             bodyContent: ``,
           });
           break;
-        } else if (value === "") {
+        } 
+        else if (value === "") {
           //if gRPC
           this.props.setNewRequestFields({
             ...this.props.newRequestFields,
@@ -78,7 +80,8 @@ class FieldEntryForm extends Component {
             bodyContent: ``,
           });
           break;
-        } else if (value === "ws://") {
+        } 
+        else if (value === "ws://") {
           //if ws
           this.props.setNewRequestFields({
             ...this.props.newRequestFields,
@@ -143,7 +146,8 @@ class FieldEntryForm extends Component {
             ...this.props.newRequestBody,
             bodyContent: newBody,
           });
-        } else if (value === "MUTATION") {
+        } 
+        else if (value === "MUTATION") {
           newBody = methodReplaceRegex.test(
             this.props.newRequestBody.bodyContent
           )
@@ -157,7 +161,8 @@ class FieldEntryForm extends Component {
             ...this.props.newRequestBody,
             bodyContent: newBody,
           });
-        } else if (value === "SUBSCRIPTION") {
+        } 
+        else if (value === "SUBSCRIPTION") {
           newBody = methodReplaceRegex.test(
             this.props.newRequestBody.bodyContent
           )
@@ -194,7 +199,7 @@ class FieldEntryForm extends Component {
           gRPC={this.props.newRequestFields.gRPC}
         />
 
-        <div className={"composer_method_url_container"}>
+        <div className="composer_method_url_container">
           {/* below conditional method selection rendering for http/s */}
           {!/wss?:\/\//.test(this.props.newRequestFields.protocol) &&
             !this.props.newRequestFields.graphQL &&
@@ -202,7 +207,7 @@ class FieldEntryForm extends Component {
               <select
                 style={{ display: "block" }}
                 value={this.props.newRequestFields.method}
-                className={"composer_method_select http"}
+                className="composer_method_select http"
                 onChange={(e) => {
                   this.onChangeHandler(e, "method");
                 }}
@@ -221,7 +226,7 @@ class FieldEntryForm extends Component {
               <select
                 style={{ display: "block" }}
                 value={this.props.newRequestFields.method}
-                className={"composer_method_select gql"}
+                className="composer_method_select gql"
                 onChange={(e) => {
                   this.onChangeHandler(e, "method");
                 }}
@@ -239,14 +244,14 @@ class FieldEntryForm extends Component {
               style={{ display: "block" }}
               id="stream"
               value="STREAM"
-              className={"composer_method_select grpc"}
+              className="composer_method_select grpc"
             >
               STREAM
             </button>
           )}
 
           <input
-            className={"composer_url_input"}
+            className="composer_url_input"
             type="text"
             placeholder="URL"
             value={this.props.newRequestFields.url}

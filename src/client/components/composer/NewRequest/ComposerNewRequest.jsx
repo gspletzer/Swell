@@ -28,12 +28,14 @@ class ComposerNewRequest extends Component {
     if (!/(https?:\/\/)|(wss?:\/\/)/.test(this.props.newRequestFields.url)) {
       //if url doesn't have http/https/ws/wss://
       validationMessage = "Please enter a valid URI.";
-    } else if (
+    } 
+    else if (
       !this.props.newRequestBody.JSONFormatted &&
       this.props.newRequestBody.rawType === "application/json"
     ) {
       validationMessage = "Please fix JSON body formatting errors.";
-    } else if (this.props.newRequestFields.method === "QUERY") {
+    } 
+    else if (this.props.newRequestFields.method === "QUERY") {
       if (
         this.props.newRequestFields.url &&
         !this.props.newRequestBody.bodyContent
@@ -79,7 +81,8 @@ class ComposerNewRequest extends Component {
         } //grabs the input value in case tab was last key pressed
         else if (this.props.newRequestBody.bodyContent) {
           historyBodyContent = this.props.newRequestBody.bodyContent;
-        } else historyBodyContent = "";
+        } 
+        else historyBodyContent = "";
         let historyBodyVariables;
         if (document.querySelector("#gqlVariableEntryTextArea")) {
           historyBodyVariables = document.querySelector(
@@ -146,7 +149,8 @@ class ComposerNewRequest extends Component {
         } //grabs the input value in case tab was last key pressed
         else if (this.props.newRequestBody.bodyContent) {
           historyBodyContent = this.props.newRequestBody.bodyContent;
-        } else historyBodyContent = "";
+        } 
+        else historyBodyContent = "";
         let historyBodyVariables;
         if (document.querySelector("#gqlVariableEntryTextArea")) {
           historyBodyVariables = document.querySelector(
@@ -349,7 +353,8 @@ class ComposerNewRequest extends Component {
         });
       }
       this.props.setNewRequestSSE(false);
-    } else {
+    } 
+    else {
       this.props.setComposerWarningMessage(validated);
       this.props.setComposerDisplay("Warning");
     }
@@ -369,11 +374,14 @@ class ComposerNewRequest extends Component {
       !this.props.newRequestFields.gRPC
     ) {
       SubmitButtonClassName += " ws";
-    } else if (this.props.newRequestFields.graphQL) {
+    } 
+    else if (this.props.newRequestFields.graphQL) {
       SubmitButtonClassName += " gql";
-    } else if (this.props.newRequestFields.gRPC) {
+    } 
+    else if (this.props.newRequestFields.gRPC) {
       SubmitButtonClassName += " grpc";
-    } else {
+    } 
+    else {
       SubmitButtonClassName += " http";
     }
     return (
