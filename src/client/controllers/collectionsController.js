@@ -1,8 +1,8 @@
+import { ipcRenderer } from "electron";
+import uuid from "uuid/v4";
 import * as store from "../store";
 import * as actions from "../actions/actions";
 import db from "../db";
-import { ipcRenderer } from "electron";
-import uuid from "uuid/v4";
 
 ipcRenderer.on("add-collection", (event, args) => {
   collectionsController.addCollectionToIndexedDb(JSON.parse(args.data));
@@ -56,7 +56,7 @@ const collectionsController = {
       .equals(id)
       .first((foundCollection) => {
         // change name and id of collection to satisfy uniqueness requirements of db
-        foundCollection.name = foundCollection.name + " import";
+        foundCollection.name += " import";
         foundCollection.id = uuid();
 
         ipcRenderer.send("export-collection", { collection: foundCollection });

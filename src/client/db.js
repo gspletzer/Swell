@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 import Dexie from "dexie";
 
 const db = new Dexie("Swell");

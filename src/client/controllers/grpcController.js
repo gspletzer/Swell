@@ -1,9 +1,10 @@
+/* eslint-disable brace-style */
 // import { Router } from "express";
 import { ipcRenderer } from "electron";
 import { remote } from "electron";
+import { Metadata } from "grpc";
 import * as store from "../store";
 import * as actions from "../actions/actions";
-import { Metadata } from "grpc";
 
 const async = require("async");
 const fs = require("fs");
@@ -254,7 +255,7 @@ grpcController.openGrpcConnection = (reqResObj, connectionArray) => {
       store.default.dispatch(actions.reqResUpdate(reqResObj));
     });
 
-    for (var i = 0; i < queryArr.length; i++) {
+    for (let i = 0; i < queryArr.length; i++) {
       let time = {};
       let query = queryArr[i];
       //Open Connection for BIDIRECTIONAL Stream

@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 // Allow self-signing HTTPS over TLS
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
@@ -178,6 +179,7 @@ function createWindow() {
       pathname: "index.html",
       slashes: true,
     });
+    // eslint-disable-next-line brace-style
   } else {
     indexPath = url.format({
       // if we are not in dev mode load production build file
@@ -313,7 +315,7 @@ ipcMain.on("export-collection", (event, args) => {
     // fileName is a string that contains the path and filename created in the save file dialog.
     fs.writeFile(resp.filePath, content, (err) => {
       if (err) {
-        console.log("An error ocurred creating the file " + err.message);
+        console.log(`An error ocurred creating the file ${err.message}`);
       }
     });
   });
@@ -353,7 +355,7 @@ ipcMain.on("import-collection", (event, args) => {
 
     fs.readFile(filepath, "utf-8", (err, data) => {
       if (err) {
-        alert("An error ocurred reading the file :" + err.message);
+        alert(`An error ocurred reading the file : ${err.message}`);
         return;
       }
 
@@ -361,6 +363,7 @@ ipcMain.on("import-collection", (event, args) => {
       let parsed;
       try {
         parsed = JSON.parse(data);
+        // eslint-disable-next-line brace-style
       } catch {
         options.message = "Invalid File Structure";
         options.detail = "Please use a JSON object";

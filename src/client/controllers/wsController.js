@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 import * as store from "../store";
 import * as actions from "../actions/actions";
 import connectionController from "./reqResController.js";

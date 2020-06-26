@@ -116,7 +116,6 @@ module.exports = {
     "no-shadow": 0,
     "no-return-assign": 0,
     "class-methods-use-this": 0,
-    "brace-style": [2, "stroustrup"],
     "react/sort-comp": [
       2,
       {

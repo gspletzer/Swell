@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 const fs = require("fs");
 const grpc = require("grpc");
 const protoLoader = require("@grpc/proto-loader");
