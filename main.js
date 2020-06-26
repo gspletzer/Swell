@@ -11,13 +11,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 // Import parts of electron to use
 // app - Control your application's event lifecycle
 // ipcMain - Communicate asynchronously from the main process to renderer processes
-<<<<<<< HEAD
-const { app, BrowserWindow, TouchBar, ipcMain, dialog } = require("electron");
-const path = require("path");
-const url = require("url");
-const fs = require("fs");
-=======
->>>>>>> master
 
 // npm libraries
 const { app, BrowserWindow, TouchBar, ipcMain, dialog } = require("electron");
@@ -28,12 +21,6 @@ const {
 } = require("electron-devtools-installer");
 // Import Auto-Updater- Swell will update itself
 const { autoUpdater } = require("electron-updater");
-<<<<<<< HEAD
-const log = require("electron-log");
-// TouchBarButtons are our nav buttons(ex: Select All, Deselect All, Open Selected, Close Selected, Clear All)
-const { TouchBarButton, TouchBarSpacer } = TouchBar;
-
-=======
 // TouchBarButtons are our nav buttons(ex: Select All, Deselect All, Open Selected, Close Selected, Clear All)
 const { TouchBarButton, TouchBarSpacer } = TouchBar;
 
@@ -42,28 +29,20 @@ const url = require("url");
 const fs = require("fs");
 const log = require("electron-log");
 
->>>>>>> master
 // basic http cookie parser
 const cookie = require("cookie");
 // node-fetch for the fetch request
 const fetch2 = require("node-fetch");
 
 // GraphQL imports
-<<<<<<< HEAD
-const ApolloClient = require("apollo-client").ApolloClient;
-=======
 const { ApolloClient } = require("apollo-client");
->>>>>>> master
 const gql = require("graphql-tag");
 const { InMemoryCache } = require("apollo-cache-inmemory");
 const { createHttpLink } = require("apollo-link-http");
 const { ApolloLink } = require("apollo-link");
-<<<<<<< HEAD
-=======
 
 // require menu file
 require("./menu/mainMenu");
->>>>>>> master
 
 // configure logging
 autoUpdater.logger = log;
@@ -151,19 +130,6 @@ const touchBar = new TouchBar([
   tbClearAllButton,
 ]);
 
-<<<<<<< HEAD
-// Keep a reference for dev mode
-let dev = false;
-
-if (
-  process.defaultApp ||
-  /[\\/]electron-prebuilt[\\/]/.test(process.execPath) ||
-  /[\\/]electron[\\/]/.test(process.execPath)
-) {
-  dev = true;
-}
-
-=======
 // -----------------------------------------------
 // prod / dev mode determined by boolean 'isDev'
 // -----------------------------------------------
@@ -189,7 +155,6 @@ console.log("isDev->", isDev);
 // );
 // if (isDev) console.log("isDev is TRUE");
 // if (isDev === false) console.log("isDev is FALSE");
->>>>>>> master
 // Temporary fix broken high-dpi scale factor on Windows (125% scaling)
 // info: https://github.com/electron/electron/issues/9691
 if (process.platform === "win32") {
@@ -221,16 +186,7 @@ function createWindow() {
     icon: `${__dirname}/src/assets/icons/64x64.png`,
   });
 
-<<<<<<< HEAD
-  if (dev) {
-    const {
-      default: installExtension,
-      REACT_DEVELOPER_TOOLS,
-      REDUX_DEVTOOLS,
-    } = require("electron-devtools-installer");
-=======
   if (isDev) {
->>>>>>> master
     // If we are in developer mode Add React & Redux DevTools to Electon App
     installExtension(REACT_DEVELOPER_TOOLS)
       .then((name) => console.log(`Added Extension:  ${name}`))
@@ -244,11 +200,7 @@ function createWindow() {
   // and load the index.html of the app.
   let indexPath;
 
-<<<<<<< HEAD
-  if (dev && process.argv.indexOf("--noDevServer") === -1) {
-=======
   if (isDev && process.argv.indexOf("--noDevServer") === -1) {
->>>>>>> master
     // if we are in dev mode load up 'http://localhost:8080/index.html'
     indexPath = url.format({
       protocol: "http:",
@@ -256,10 +208,6 @@ function createWindow() {
       pathname: "index.html",
       slashes: true,
     });
-<<<<<<< HEAD
-    // eslint-disable-next-line brace-style
-=======
->>>>>>> master
   } else {
     indexPath = url.format({
       // if we are not in dev mode load production build file
@@ -282,11 +230,7 @@ function createWindow() {
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
     // Open the DevTools automatically if developing
-<<<<<<< HEAD
-    if (dev) {
-=======
     if (isDev) {
->>>>>>> master
       mainWindow.webContents.openDevTools();
     }
   });
@@ -301,12 +245,7 @@ function createWindow() {
     mainWindow = null;
   });
 
-<<<<<<< HEAD
-  //require menu file
-  require("./menu/mainMenu");
-=======
   // moved require mainmenu to top
->>>>>>> master
 }
 
 /********* end of createWindow declaration ******/
@@ -318,19 +257,12 @@ function createWindow() {
 // app.on('ready') will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-<<<<<<< HEAD
-app.on("ready", () => {
-  // createLoadingScreen();
-  createWindow();
-  if (!dev) {
-=======
 
 // if in prod mode, checkForUpdates after the window is created
 app.on("ready", () => {
   // createLoadingScreen();
   createWindow();
   if (!isDev) {
->>>>>>> master
     autoUpdater.checkForUpdates();
   }
 });
@@ -355,11 +287,7 @@ const sendStatusToWindow = (text) => {
 
 ipcMain.on("check-for-update", () => {
   //listens to ipcRenderer in UpdatePopUpContainer.jsx
-<<<<<<< HEAD
-  if (!dev) autoUpdater.checkForUpdates();
-=======
   if (!isDev) autoUpdater.checkForUpdates();
->>>>>>> master
 });
 // autoUpdater.on('checking-for-update', () => {
 // sendStatusToWindow('Checking for update...');
@@ -371,11 +299,7 @@ ipcMain.on("check-for-update", () => {
 //   sendStatusToWindow('Update not available.');
 // });
 autoUpdater.on("error", (err) => {
-<<<<<<< HEAD
-  console.error(err);
-=======
   console.error("autoUpdater error -> ", err);
->>>>>>> master
   sendStatusToWindow(`Error in auto-updater`);
 });
 autoUpdater.on("download-progress", (progressObj) => {
@@ -415,11 +339,7 @@ app.on("activate", () => {
 
 // export collection ipc now promise-based
 ipcMain.on("export-collection", (event, args) => {
-<<<<<<< HEAD
-  let content = JSON.stringify(args.collection);
-=======
   const content = JSON.stringify(args.collection);
->>>>>>> master
   dialog.showSaveDialog(null).then((resp) => {
     if (resp.filePath === undefined) {
       console.log("You didn't save the file");
@@ -429,11 +349,7 @@ ipcMain.on("export-collection", (event, args) => {
     // fileName is a string that contains the path and filename created in the save file dialog.
     fs.writeFile(resp.filePath, content, (err) => {
       if (err) {
-<<<<<<< HEAD
-        console.log(`An error ocurred creating the file ${err.message}`);
-=======
         console.log("An error ocurred creating the file ", err.message);
->>>>>>> master
       }
     });
   });
@@ -473,11 +389,7 @@ ipcMain.on("import-collection", (event, args) => {
 
     fs.readFile(filepath, "utf-8", (err, data) => {
       if (err) {
-<<<<<<< HEAD
-        alert(`An error ocurred reading the file : ${err.message}`);
-=======
         alert("An error ocurred reading the file :", err.message);
->>>>>>> master
         return;
       }
 
@@ -485,10 +397,6 @@ ipcMain.on("import-collection", (event, args) => {
       let parsed;
       try {
         parsed = JSON.parse(data);
-<<<<<<< HEAD
-        // eslint-disable-next-line brace-style
-=======
->>>>>>> master
       } catch {
         options.message = "Invalid File Structure";
         options.detail = "Please use a JSON object";
@@ -579,11 +487,7 @@ ipcMain.on("open-gql", (event, args) => {
     return forward(operation).map((response) => {
       const context = operation.getContext();
       const headers = context.response.headers.entries();
-<<<<<<< HEAD
-      for (let headerItem of headers) {
-=======
       for (const headerItem of headers) {
->>>>>>> master
         const key = headerItem[0]
           .split("-")
           .map((item) => item[0].toUpperCase() + item.slice(1))
